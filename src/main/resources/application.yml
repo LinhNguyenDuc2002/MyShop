@@ -1,0 +1,46 @@
+server:
+  port: ${SERVER_PORT:8000}
+
+spring:
+#  config:
+#    activate:
+#      on-profile: dev
+  application:
+    name: ${APPLICATION_NAME:MyShop}
+
+  # Database
+  datasource:
+    url: ${MYSQL_DATABASE_URL}
+    username: ${MYSQL_DATABASE_USERNAME}
+    password: ${MYSQL_DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari: # connection pooling library
+      maximum-pool-size: 5 # maximum number of connection pooling at the same time
+      minimum-idle: 1 # minimum number of connection pooling
+      idle-timeout: 300000 # free time before canceled
+      max-lifetime: 1800000
+      validation-timeout: 5000
+      connection-test-query: SELECT 1
+
+  # A option in springboot framework is used to define Hibernate behavior in creating and updating database
+  # Hibernate will create and update tables in database, corresponding to object in your app.
+  # if table don't exist, Hibernate will create it. Else, Hibernate will update changes
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  lombok:
+    enabled: true
+
+cloudinary:
+  cloudName: ${CLOUDINARY_CLOUD_NAME}
+  apiKey: ${CLOUDINARY_API_KEY}
+  apiSecret: ${CLOUDINARY_API_SECRET}
+
+# automatically config
+#cloudinary:
+#  cloud_name: ${CLOUDINARY_CLOUD_NAME}
+#  api_key: ${CLOUDINARY_API_KEY}
+#  api_secret: ${CLOUDINARY_API_SECRET}
