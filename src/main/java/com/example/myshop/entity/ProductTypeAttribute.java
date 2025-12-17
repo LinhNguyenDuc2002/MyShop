@@ -16,7 +16,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "product_type_attribute")
+@Table(name = "product_type_attributes")
 public class ProductTypeAttribute {
     @EmbeddedId
     private ProductTypeAttributeId id;

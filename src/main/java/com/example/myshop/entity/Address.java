@@ -11,7 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 @Setter
 @Getter
 public class Address {

@@ -34,6 +34,13 @@ spring:
   lombok:
     enabled: true
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI}
+          jwk-set-uri: ${JWK_SET_URI}
+
 cloudinary:
   cloudName: ${CLOUDINARY_CLOUD_NAME}
   apiKey: ${CLOUDINARY_API_KEY}
@@ -44,3 +51,16 @@ cloudinary:
 #  cloud_name: ${CLOUDINARY_CLOUD_NAME}
 #  api_key: ${CLOUDINARY_API_KEY}
 #  api_secret: ${CLOUDINARY_API_SECRET}
+
+# Keycloak
+keycloak:
+  admin:
+    enabled: true
+    auth-server-url: ${KEYCLOAK_SERVER}
+    credentials:
+      client-secret: ${KEYCLOAK_CLIENT_SECRET}
+#      username: ${KEYCLOAK_ADMIN_USER}
+#      password: ${KEYCLOAK_ADMIN_PASSWORD}
+      client-id: ${KEYCLOAK_CLIENT_ID}
+    realm: ${KEYCLOAK_REALM}
+    bearer-only: 'true'

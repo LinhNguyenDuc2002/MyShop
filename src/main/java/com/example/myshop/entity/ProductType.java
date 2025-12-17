@@ -15,7 +15,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Collection;
 
 @Entity
-@Table(name = "product_type")
+@Table(name = "product_types")
 public class ProductType {
     @Id
     @UuidGenerator

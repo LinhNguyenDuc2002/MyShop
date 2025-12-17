@@ -12,7 +12,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
-@Table(name = "shop")
+@Table(name = "shops")
 @Setter
 @Getter
 public class Shop {

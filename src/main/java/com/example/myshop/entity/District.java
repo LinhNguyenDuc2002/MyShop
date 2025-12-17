@@ -13,7 +13,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Collection;
 
 @Entity
-@Table(name = "district")
+@Table(name = "districts")
 public class District {
     @Id
     @UuidGenerator

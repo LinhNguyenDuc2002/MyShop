@@ -15,8 +15,8 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Collection;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "purchase_orders")
+public class PurchaseOrder {
     @Id
     @UuidGenerator
     private String id;
@@ -31,7 +31,7 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "purchaseOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<OrderProductType> orderProductTypes;
 
     @OneToOne

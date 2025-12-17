@@ -15,7 +15,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "product_category")
+@Table(name = "product_categories")
 public class ProductCategory {
     @EmbeddedId
     private ProductCategoryId productCategoryId;
