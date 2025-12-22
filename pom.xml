@@ -33,6 +33,7 @@
 		<modelmapper.version>3.1.0</modelmapper.version>
 		<cloudinary-http44.version>1.33.0</cloudinary-http44.version>
 		<jakarta-validation.version>3.0.0</jakarta-validation.version>
+		<hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
 		<keycloak-admin-client.version>25.0.0</keycloak-admin-client.version>
 	</properties>
 	<dependencies>
@@ -44,6 +45,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!--		Web client-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
         <dependency>
@@ -69,12 +76,6 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.hibernate</groupId>-->
-<!--			<artifactId>hibernate-validator</artifactId>-->
-<!--			<version>${hibernate-validator.version}</version>-->
-<!--		</dependency>-->
-
 		<dependency>
 			<groupId>com.cloudinary</groupId>
 			<artifactId>cloudinary-http44</artifactId>
@@ -91,6 +92,12 @@
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 			<version>${jakarta-validation.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
 		</dependency>
 
 		<dependency>
