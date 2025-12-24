@@ -33,6 +33,9 @@
 		<modelmapper.version>3.1.0</modelmapper.version>
 		<cloudinary-http44.version>1.33.0</cloudinary-http44.version>
 		<jakarta-validation.version>3.0.0</jakarta-validation.version>
+		<hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
+		<keycloak-admin-client.version>25.0.0</keycloak-admin-client.version>
+        <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -43,6 +46,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+
+		<!--		Web client-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
         <dependency>
@@ -63,11 +78,10 @@
 			<version>${modelmapper.version}</version>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.hibernate</groupId>-->
-<!--			<artifactId>hibernate-validator</artifactId>-->
-<!--			<version>${hibernate-validator.version}</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.cloudinary</groupId>
@@ -88,6 +102,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<scope>test</scope>
@@ -99,6 +119,18 @@
 <!--			<version>5.2.0</version>-->
 <!--			<scope>test</scope>-->
 <!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+
+		<!--		keycloak-spring-boot-starter is deprecated since Keycloak version 18-->
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>${keycloak-admin-client.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

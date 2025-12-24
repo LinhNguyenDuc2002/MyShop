@@ -19,7 +19,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Collection;
 
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

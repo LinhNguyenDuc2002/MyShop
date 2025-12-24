@@ -29,8 +29,8 @@ public class OrderProductType {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "purchase_order_id")
+    private PurchaseOrder purchaseOrder;
 
     @ManyToOne
     @JoinColumn(name = "product_type_id")

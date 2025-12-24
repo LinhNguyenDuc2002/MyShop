@@ -14,7 +14,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
-@Table(name = "image")
+@Table(name = "images")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

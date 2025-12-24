@@ -15,7 +15,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "voucher_product")
+@Table(name = "voucher_products")
 public class VoucherProduct {
     @EmbeddedId
     private VoucherProductId voucherProductId;

@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
-@Table(name = "attribute")
+@Table(name = "attributes")
 public class Attribute {
     @Id
     @UuidGenerator

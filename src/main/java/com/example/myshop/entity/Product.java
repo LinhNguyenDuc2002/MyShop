@@ -12,7 +12,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.Collection;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     @UuidGenerator
