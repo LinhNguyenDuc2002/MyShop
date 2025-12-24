@@ -1,15 +1,12 @@
 package com.example.myshop.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This configuration contains th project specific config and the bean provider
@@ -19,6 +16,20 @@ public class ApplicationConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    /**
+     * Swagger config
+     * http://localhost:8080/api/swagger-ui/index.html
+     *
+     * @return
+     */
+    @Bean
+    public GroupedOpenApi controllerApi() {
+        return GroupedOpenApi.builder()
+                .group("Api")
+                .packagesToScan("com.example.myshop.controller") // Specify the package to scan
+                .build();
     }
 
 //    @Bean
