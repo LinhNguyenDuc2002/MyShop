@@ -4,6 +4,8 @@ import com.example.myshop.dto.UserDTO;
 import com.example.myshop.payload.UserPayload;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,4 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface UserResource {
     @PostMapping
     ResponseEntity<UserDTO> register(@Valid @RequestBody UserPayload userPayload) throws Exception;
+
+    @GetMapping("/me")
+    ResponseEntity<UserDTO> getCurrentUser();
+
+    @GetMapping("/{id}")
+    ResponseEntity<UserDTO> get(@PathVariable String id);
 }

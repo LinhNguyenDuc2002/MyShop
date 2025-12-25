@@ -47,8 +47,9 @@ public class UserServiceImpl implements UserService {
         }
 
         UserRequest userRequest = buildUserRequest(userPayload);
-        keycloakService.createUser(userRequest);
+        String keycloakId = keycloakService.createUser(userRequest);
         User user = User.builder()
+                .keycloakId(keycloakId)
                 .username(userPayload.getUsername())
                 .email(userPayload.getEmail())
                 .firstName(userPayload.getFirstName())
@@ -56,6 +57,24 @@ public class UserServiceImpl implements UserService {
                 .phoneNumber(userPayload.getPhoneNumber())
                 .build();
         userRepository.save(user);
+        return userMapper.toDto(user);
+    }
+
+    @Override
+    public UserDTO getCurrentUser() {
+        return null;
+    }
+
+    @Override
+    public UserDTO get(String id) throws I18nException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    return I18nException.builder()
+                            .code(HttpStatus.NOT_FOUND)
+                            .message("")
+                            .build();
+                });
+
         return userMapper.toDto(user);
     }
 

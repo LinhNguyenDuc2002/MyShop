@@ -1,6 +1,7 @@
 package com.example.myshop.webclient;
 
 import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
 import java.util.Map;
@@ -26,10 +27,10 @@ public interface WebClientProcessor {
      * @param <T>    The response class type
      * @return
      */
-    <T> T post(@NotNull final String uri,
-               final Map<String, String> header,
-               final Object body,
-               final Class<T> clazz) throws Exception;
+    <T> ResponseEntity<T> post(@NotNull final String uri,
+                               final Map<String, String> header,
+                               final Object body,
+                               final Class<T> clazz) throws Exception;
 
 //    /**
 //     * @param uri      The request url

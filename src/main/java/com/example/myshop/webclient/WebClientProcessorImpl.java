@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -48,7 +49,7 @@ public class WebClientProcessorImpl implements WebClientProcessor {
     }
 
     @Override
-    public <T> T post(String uri, Map<String, String> header, Object body, Class<T> clazz) throws Exception {
+    public <T> ResponseEntity<T> post(String uri, Map<String, String> header, Object body, Class<T> clazz) throws Exception {
         final Map<String, String> requestHeader = header == null ? Collections.emptyMap() : header;
 
         try {
@@ -58,7 +59,7 @@ public class WebClientProcessorImpl implements WebClientProcessor {
                     .headers(h -> h.setAll(requestHeader))
                     .body(Mono.just(body), Object.class)
                     .retrieve()
-                    .bodyToMono(clazz)
+                    .toEntity(clazz)
                     .doOnError(e -> log.error("Failed to initialize the data: " + e.getMessage()))
                     .block();
         } catch (WebClientResponseException e) {

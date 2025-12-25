@@ -6,4 +6,8 @@ import com.example.myshop.payload.UserPayload;
 
 public interface UserService {
     UserDTO create(UserPayload userPayload) throws Exception;
+
+    UserDTO getCurrentUser();
+
+    UserDTO get(String id) throws I18nException;
 }

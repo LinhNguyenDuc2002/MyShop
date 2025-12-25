@@ -19,4 +19,18 @@ public class UserController implements UserResource {
                 .status(HttpStatus.CREATED)
                 .body(userService.create(userPayload));
     }
+
+    @Override
+    public ResponseEntity<UserDTO> getCurrentUser() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userService.getCurrentUser());
+    }
+
+    @Override
+    public ResponseEntity<UserDTO> get(String id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userService.get(id));
+    }
 }
