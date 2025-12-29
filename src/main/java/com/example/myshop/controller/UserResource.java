@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RequestMapping("/users")
 public interface UserResource {
     @PostMapping
@@ -26,7 +28,7 @@ public interface UserResource {
     ResponseEntity<UserDTO> get(@PathVariable String id) throws I18nException;
 
     @PostMapping("/avatar")
-    ResponseEntity<Void> setAvatar(MultipartFile avatar) throws I18nException;
+    ResponseEntity<Void> setAvatar(MultipartFile avatar) throws I18nException, IOException;
 
     @PutMapping("/password")
     ResponseEntity<UserProjection> changePassword() throws I18nException;

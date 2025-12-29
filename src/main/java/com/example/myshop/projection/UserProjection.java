@@ -23,5 +23,6 @@ public interface UserProjection {
 
     String getPhoneNumber();
 
-//    String getAvatarUrl();
+    @Value("#{target.image.secureUrl}")
+    String getAvatarUrl();
 }

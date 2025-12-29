@@ -20,6 +20,5 @@ public class CategoryPayload {
 
     private String description;
 
-    @NotNull(message = "")
     private MultipartFile image;
 }

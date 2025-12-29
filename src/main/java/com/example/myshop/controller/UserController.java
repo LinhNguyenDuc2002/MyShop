@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 public class UserController implements UserResource {
     @Autowired
@@ -38,7 +40,7 @@ public class UserController implements UserResource {
     }
 
     @Override
-    public ResponseEntity<Void> setAvatar(MultipartFile avatar) throws I18nException {
+    public ResponseEntity<Void> setAvatar(MultipartFile avatar) throws I18nException, IOException {
         userService.setAvatar(avatar);
         return ResponseEntity.noContent().build();
     }
