@@ -1,12 +1,10 @@
 package com.example.myshop.config;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 import org.modelmapper.ModelMapper;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 /**
  * This configuration contains th project specific config and the bean provider
@@ -30,6 +28,11 @@ public class ApplicationConfig {
                 .group("Api")
                 .packagesToScan("com.example.myshop.controller") // Specify the package to scan
                 .build();
+    }
+
+    @Bean
+    public JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter() {
+        return new JwtGrantedAuthoritiesConverter();
     }
 
 //    @Bean

@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.Map;
 
@@ -32,12 +34,17 @@ public class KeycloakServiceImpl implements KeycloakService {
     private Keycloak keycloak;
 
     /**
-     * Format ex: http://<KEYCLOAK_URL>/admin/realms<REALM_NAME>/users
+     * Format ex: http://<KEYCLOAK_URL>/admin/realms/<REALM_NAME>/users
      */
     private static final String USER_RESOURCE = "%s/admin/realms/%s/users";
 
+    /**
+     * Format ex: http://<KEYCLOAK_URL>/admin/realms/<REALM_NAME>/users/<USER_ID>/reset-password
+     */
+    private static final String PASSWORD_RESOURCE = "%s/admin/realms/%s/users/%s/reset-password";
+
     @Override
-    public UserRepresentation createUser(UserRequest userRequest) throws Exception {
+    public String createUser(UserRequest userRequest) throws Exception {
         String endpoint = String.format(USER_RESOURCE, serverUrl, realm);
 
         Map<String, String> headers = Map.of(
@@ -46,20 +53,24 @@ public class KeycloakServiceImpl implements KeycloakService {
                 HttpHeaders.ACCEPT, Collections.singletonList(MediaType.APPLICATION_JSON_VALUE).toString()
         );
 
-        Object response = webClient.post(
+        ResponseEntity<UserRepresentation> response = webClient.post(
                 endpoint,
                 headers,
                 userRequest,
                 UserRepresentation.class
         );
 
-//        log.info("Created new member with email: {}", member.getEmail());
-//
-//        if (responseEntity.getBody() != null) {
-//            List<String> roles = ZenoUserRole.handleFromKeycloakRole(responseEntity.getBody().getOrgRoles());
-//            responseEntity.getBody().setOrgRoles(roles);
-//        }
+        URI location = response.getHeaders().getLocation();
+        if (location != null) {
+            String path = location.getPath();
+            return path.substring(path.lastIndexOf('/') + 1);
+        }
 
         return null;
+    }
+
+    @Override
+    public void resetPassword() {
+
     }
 }

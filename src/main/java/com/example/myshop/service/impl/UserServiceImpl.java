@@ -1,20 +1,30 @@
 package com.example.myshop.service.impl;
 
+import com.example.myshop.constant.CloudinaryConstant;
 import com.example.myshop.dto.UserDTO;
 import com.example.myshop.dto.request.Credential;
 import com.example.myshop.dto.request.UserRequest;
+import com.example.myshop.entity.Image;
 import com.example.myshop.entity.User;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.mapper.UserMapper;
 import com.example.myshop.payload.UserPayload;
+import com.example.myshop.projection.UserProjection;
 import com.example.myshop.repository.UserRepository;
+import com.example.myshop.service.CloudinaryService;
 import com.example.myshop.service.KeycloakService;
 import com.example.myshop.service.UserService;
+import com.example.myshop.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,6 +36,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @Override
     public UserDTO create(UserPayload userPayload) throws Exception {
@@ -47,8 +60,9 @@ public class UserServiceImpl implements UserService {
         }
 
         UserRequest userRequest = buildUserRequest(userPayload);
-        keycloakService.createUser(userRequest);
+        String keycloakId = keycloakService.createUser(userRequest);
         User user = User.builder()
+                .keycloakId(keycloakId)
                 .username(userPayload.getUsername())
                 .email(userPayload.getEmail())
                 .firstName(userPayload.getFirstName())
@@ -57,6 +71,58 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepository.save(user);
         return userMapper.toDto(user);
+    }
+
+    @Override
+    public UserProjection getCurrentUser() throws I18nException {
+        Optional<String> keycloakId = SecurityUtils.getLoggedInUserId();
+
+        if (keycloakId.isEmpty()) {
+            throw I18nException.builder().build();
+        }
+
+        return userRepository.findUserProjectionByKeycloakId(keycloakId.get());
+    }
+
+    @Override
+    public UserDTO get(String id) throws I18nException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    return I18nException.builder()
+                            .code(HttpStatus.NOT_FOUND)
+                            .message("")
+                            .build();
+                });
+
+        return userMapper.toDto(user);
+    }
+
+    @Override
+    public void setAvatar(MultipartFile avatar) throws I18nException, IOException {
+        if (avatar == null || avatar.isEmpty()) {
+            throw I18nException.builder()
+                    .message("")
+                    .build();
+        }
+
+        Optional<String> keycloakId = SecurityUtils.getLoggedInUserId();
+        if (keycloakId.isEmpty()) {
+            throw I18nException.builder().build();
+        }
+
+        User user = userRepository.findByKeycloakId(keycloakId.get());
+        if (user == null) {
+            throw I18nException.builder().build();
+        }
+
+        Map<String, String> args = new HashMap<>();
+        if (user.getImage() != null) {
+            Image image = user.getImage();
+            args.put(CloudinaryConstant.PUBLIC_ID, image.getPublicId());
+        }
+        Image image = cloudinaryService.upload(avatar, args);
+        user.setImage(image);
+        userRepository.save(user);
     }
 
     private UserRequest buildUserRequest(UserPayload userPayload) {

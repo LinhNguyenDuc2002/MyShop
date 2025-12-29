@@ -1,7 +1,7 @@
 package com.example.myshop.exception;
 
 import com.example.myshop.constant.Status;
-import com.example.myshop.util.StringUtil;
+import com.example.myshop.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
         if (ex.hasFieldErrors()) {
             List<Error> errors = ex.getFieldErrors().stream()
-                    .map(error -> new Error(StringUtil.camelCaseToSnakeCase(error.getField()), error.getDefaultMessage()))
+                    .map(error -> new Error(StringUtils.camelCaseToSnakeCase(error.getField()), error.getDefaultMessage()))
                     .toList();
             response.setData(errors);
         }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface CategoryService {
     CategoryDTO create(CategoryPayload categoryPayload) throws I18nException, IOException;
 
-    CategoryDTO update(String id, CategoryPayload categoryPayload);
+    CategoryDTO update(String id, CategoryPayload categoryPayload) throws I18nException, IOException;
 
     List<CategoryDTO> getAll();
 
