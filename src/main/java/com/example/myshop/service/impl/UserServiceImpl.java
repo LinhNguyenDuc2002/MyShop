@@ -7,14 +7,18 @@ import com.example.myshop.entity.User;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.mapper.UserMapper;
 import com.example.myshop.payload.UserPayload;
+import com.example.myshop.projection.UserProjection;
 import com.example.myshop.repository.UserRepository;
 import com.example.myshop.service.KeycloakService;
 import com.example.myshop.service.UserService;
+import com.example.myshop.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -61,8 +65,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getCurrentUser() {
-        return null;
+    public UserProjection getCurrentUser() throws I18nException {
+        Optional<String> keycloakId = SecurityUtils.getLoggedInUserId();
+
+        if(keycloakId.isEmpty()) {
+            throw I18nException.builder().build();
+        }
+
+        return userRepository.findUserProjectionByKeycloakId(keycloakId.get());
     }
 
     @Override
@@ -76,6 +86,37 @@ public class UserServiceImpl implements UserService {
                 });
 
         return userMapper.toDto(user);
+    }
+
+    @Override
+    public void setAvatar(MultipartFile avatar) throws I18nException {
+        if (avatar == null || avatar.isEmpty()) {
+            throw I18nException.builder()
+                    .message("")
+                    .build();
+        }
+
+        Optional<String> keycloakId = SecurityUtils.getLoggedInUserId();
+        if(keycloakId.isEmpty()) {
+            throw I18nException.builder().build();
+        }
+
+        User user = userRepository.findByKeycloakId(keycloakId.get());
+
+        String id = UUID.randomUUID().toString();
+        Map<String, MultipartFile> images = new HashMap<>();
+        images.put(id, file);
+
+        String imageId = user.getImageId();
+        if (StringUtils.hasText(imageId)) {
+            imageRepository.deleteById(imageId);
+            cloudinaryService.destroy(imageId);
+        }
+        user.setImageId(id);
+        userRepository.save(user);
+        cloudinaryService.upload(images);
+
+        return "";
     }
 
     private UserRequest buildUserRequest(UserPayload userPayload) {

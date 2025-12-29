@@ -34,9 +34,14 @@ public class KeycloakServiceImpl implements KeycloakService {
     private Keycloak keycloak;
 
     /**
-     * Format ex: http://<KEYCLOAK_URL>/admin/realms<REALM_NAME>/users
+     * Format ex: http://<KEYCLOAK_URL>/admin/realms/<REALM_NAME>/users
      */
     private static final String USER_RESOURCE = "%s/admin/realms/%s/users";
+
+    /**
+     * Format ex: http://<KEYCLOAK_URL>/admin/realms/<REALM_NAME>/users/<USER_ID>/reset-password
+     */
+    private static final String PASSWORD_RESOURCE = "%s/admin/realms/%s/users/%s/reset-password";
 
     @Override
     public String createUser(UserRequest userRequest) throws Exception {
@@ -62,5 +67,10 @@ public class KeycloakServiceImpl implements KeycloakService {
         }
 
         return null;
+    }
+
+    @Override
+    public void resetPassword() {
+
     }
 }

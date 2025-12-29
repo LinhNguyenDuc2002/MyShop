@@ -45,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
         Map<String, String> args = ObjectUtils.asMap();
         args.put(CloudinaryConstant.FOLDER, FOLDER);
         args.put(CloudinaryConstant.PUBLIC_ID, category.getImage().getId());
-        cloudinaryService.upload(categoryPayload.getImage(), args);
+//        cloudinaryService.upload(categoryPayload.getImage(), args);
 
         return categoryMapper.toDto(category);
     }

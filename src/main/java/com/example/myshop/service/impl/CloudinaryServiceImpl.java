@@ -24,7 +24,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     private ImageRepository imageRepository;
 
     @Override
-    public void upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException {
+    public Image upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException {
         Map<String, String> result = cloudinary.uploader().upload(file.getBytes(), args);
         Image image = imageRepository.findById(args.get(CloudinaryConstant.PUBLIC_ID))
                 .orElseThrow(() -> {
@@ -38,7 +38,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         image.setFormat(result.get(CloudinaryConstant.FORMAT));
         image.setResourceType(result.get(CloudinaryConstant.RESOURCE_TYPE));
         image.setSecureUrl(result.get(CloudinaryConstant.SECURE_URL));
-        imageRepository.save(image);
+        return imageRepository.save(image);
     }
 
     @Override

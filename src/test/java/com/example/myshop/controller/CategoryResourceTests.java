@@ -68,7 +68,7 @@ public class CategoryResourceTests extends BaseTest {
                 .image(multipartFile)
                 .build();
 //        when(cloudinary.uploader().upload(any(byte[].class), any())).thenReturn(new HashMap<>());
-        doNothing().when(cloudinaryService).upload(any(MultipartFile.class), any(Map.class));
+//        doNothing().when(cloudinaryService).upload(any(MultipartFile.class), any(Map.class));
 
         ResponseEntity<CategoryDTO> response = categoryResource.create(categoryPayload);
 
