@@ -1,5 +1,6 @@
 package com.example.myshop.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -30,6 +31,9 @@ public class ProductTypeAttribute {
     @JoinColumn(name = "attribute_id")
     @MapsId("attributeId")
     private Attribute attribute;
+
+    @Column(name = "value")
+    private String value;
 
     @Embeddable
     @Getter

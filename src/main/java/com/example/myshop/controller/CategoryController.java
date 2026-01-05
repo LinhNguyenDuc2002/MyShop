@@ -25,8 +25,10 @@ public class CategoryController implements CategoryResource {
     }
 
     @Override
-    public ResponseEntity<CategoryDTO> update(String id, CategoryPayload categoryPayload) {
-        return null;
+    public ResponseEntity<CategoryDTO> update(String id, CategoryPayload categoryPayload) throws I18nException, IOException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(categoryService.update(id, categoryPayload));
     }
 
     @Override
