@@ -22,7 +22,7 @@ public interface CategoryResource {
     ResponseEntity<CategoryDTO> create(@Valid @RequestBody CategoryPayload categoryPayload) throws I18nException, IOException;
 
     @PutMapping("/{id}")
-    ResponseEntity<CategoryDTO> update(@PathVariable String id, @RequestBody CategoryPayload categoryPayload);
+    ResponseEntity<CategoryDTO> update(@PathVariable String id, @RequestBody CategoryPayload categoryPayload) throws I18nException, IOException;
 
     @GetMapping
     ResponseEntity<List<CategoryDTO>> getAll();

@@ -62,7 +62,7 @@ public class WebSecurityConfig {
 //                        .requestMatchers( HttpMethod.GET, "/shop/**").permitAll()
 //                        .requestMatchers( HttpMethod.GET, "/comment/**").permitAll()
 //                        .requestMatchers( HttpMethod.GET, "/category/**").permitAll()
-//                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 //                        .requestMatchers("/dashboard/**").permitAll()
                                 .anyRequest().permitAll()
                 );

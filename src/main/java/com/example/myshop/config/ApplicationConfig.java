@@ -16,20 +16,6 @@ public class ApplicationConfig {
         return new ModelMapper();
     }
 
-    /**
-     * Swagger config
-     * http://localhost:8080/api/swagger-ui/index.html
-     *
-     * @return
-     */
-    @Bean
-    public GroupedOpenApi controllerApi() {
-        return GroupedOpenApi.builder()
-                .group("Api")
-                .packagesToScan("com.example.myshop.controller") // Specify the package to scan
-                .build();
-    }
-
     @Bean
     public JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter() {
         return new JwtGrantedAuthoritiesConverter();
