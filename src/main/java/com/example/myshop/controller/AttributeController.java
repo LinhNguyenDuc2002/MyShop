@@ -36,4 +36,17 @@ public class AttributeController implements AttributeResource {
                 .status(HttpStatus.OK)
                 .body(attributeService.search(key));
     }
+
+    @Override
+    public ResponseEntity<Void> delete(String id) throws I18nException {
+        attributeService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Object> delete(List<String> ids) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(attributeService.delete(ids));
+    }
 }

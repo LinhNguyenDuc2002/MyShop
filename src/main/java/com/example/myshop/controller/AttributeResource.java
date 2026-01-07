@@ -5,6 +5,7 @@ import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.AttributePayload;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,4 +26,10 @@ public interface AttributeResource {
 
     @GetMapping
     ResponseEntity<List<AttributeDTO>> search(@RequestParam(required = true) String key) throws I18nException;
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> delete(@PathVariable String id) throws I18nException;
+
+    @DeleteMapping
+    ResponseEntity<Object> delete(@RequestBody List<String> ids);
 }

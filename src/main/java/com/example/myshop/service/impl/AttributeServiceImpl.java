@@ -6,6 +6,7 @@ import com.example.myshop.exception.I18nException;
 import com.example.myshop.mapper.AttributeMapper;
 import com.example.myshop.payload.AttributePayload;
 import com.example.myshop.repository.AttributeRepository;
+import com.example.myshop.repository.predicate.AttributePredicate;
 import com.example.myshop.service.AttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,35 @@ public class AttributeServiceImpl implements AttributeService {
 
     @Override
     public List<AttributeDTO> search(String key) {
-        return List.of();
+        AttributePredicate attributePredicate = new AttributePredicate().type(key);
+        List<Attribute> attributes = attributeRepository.findAll(attributePredicate.getCriteria());
+        return attributeMapper.toDtoList(attributes);
+    }
+
+    @Override
+    public void delete(String id) throws I18nException {
+        boolean exist = attributeRepository.existsById(id);
+
+        if (!exist) {
+            throw I18nException.builder()
+                    .code(HttpStatus.NOT_FOUND)
+                    .message("")
+                    .build();
+        }
+
+        attributeRepository.deleteById(id);
+    }
+
+    @Override
+    public Object delete(List<String> ids) {
+        AttributePredicate attributePredicate = new AttributePredicate().inIds(ids);
+        List<Attribute> attributes = attributeRepository.findAll(attributePredicate.getCriteria());
+
+        if (attributes.size() == ids.size()) {
+            attributeRepository.deleteAllByIdInBatch(ids); // Perform a single delete operation instead of deleting each one individually.
+            return null;
+        }
+
+        return null;
     }
 }
