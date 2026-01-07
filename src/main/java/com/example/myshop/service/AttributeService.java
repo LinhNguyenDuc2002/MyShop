@@ -12,4 +12,8 @@ public interface AttributeService {
     AttributeDTO update(String id, AttributePayload attributePayload) throws I18nException;
 
     List<AttributeDTO> search(String key);
+
+    void delete(String id) throws I18nException;
+
+    Object delete(List<String> ids);
 }
