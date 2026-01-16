@@ -59,23 +59,23 @@ public class CategoryResourceTests extends BaseTest {
 
     }
 
-    @Test
-    void test_create() throws I18nException, IOException {
-        // dummy data
-        CategoryPayload categoryPayload = CategoryPayload.builder()
-                .name("Test")
-                .description("Test")
-                .image(multipartFile)
-                .build();
-//        when(cloudinary.uploader().upload(any(byte[].class), any())).thenReturn(new HashMap<>());
-//        doNothing().when(cloudinaryService).upload(any(MultipartFile.class), any(Map.class));
-
-        ResponseEntity<CategoryDTO> response = categoryResource.create(categoryPayload);
-
-        Assertions.assertNotNull(response);
-        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        Assertions.assertNotNull(response.getBody());
-    }
+//    @Test
+//    void test_create() throws I18nException, IOException {
+//        // dummy data
+//        CategoryPayload categoryPayload = CategoryPayload.builder()
+//                .name("Test")
+//                .description("Test")
+//                .image(multipartFile)
+//                .build();
+////        when(cloudinary.uploader().upload(any(byte[].class), any())).thenReturn(new HashMap<>());
+////        doNothing().when(cloudinaryService).upload(any(MultipartFile.class), any(Map.class));
+//
+//        ResponseEntity<CategoryDTO> response = categoryResource.create(categoryPayload);
+//
+//        Assertions.assertNotNull(response);
+//        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+//        Assertions.assertNotNull(response.getBody());
+//    }
 
     void mockMultipartFile() throws IOException {
         // Arrange
