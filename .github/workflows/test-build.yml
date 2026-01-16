@@ -30,5 +30,16 @@ jobs:
       - name: Build with Maven
         run: mvn clean install -DskipTests
 
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: | 
+          mvn sonar:sonar \ 
+          -Dsonar.projectKey=myshop \
+          -Dsonar.organization=my-org \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
+          
+
 #      - name: Run tests
 #        run: mvn test
