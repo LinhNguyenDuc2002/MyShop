@@ -18,5 +18,5 @@ public class CategoryDTO {
 
     private String description;
 
-//    private Image image;
+    private ImageDTO image;
 }

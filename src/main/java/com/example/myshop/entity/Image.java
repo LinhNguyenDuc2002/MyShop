@@ -1,6 +1,9 @@
 package com.example.myshop.entity;
 
+import com.example.myshop.constant.ImageStatus;
+import com.example.myshop.converter.ImageStatusConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -28,6 +31,9 @@ public class Image {
     @Column(name = "public_id")
     private String publicId;
 
+    @Column(name = "asset_id")
+    private String assetId;
+
     @Column(name = "format")
     private String format;
 
@@ -38,7 +44,9 @@ public class Image {
     private String resourceType;
 
     @Column(name = "status")
-    private boolean status;
+//    @Enumerated(EnumType.STRING)
+    @Convert(converter = ImageStatusConverter.class)
+    private ImageStatus status;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = true)

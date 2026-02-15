@@ -1,6 +1,7 @@
 package com.example.myshop.controller;
 
 import com.example.myshop.dto.CategoryDTO;
+import com.example.myshop.dto.PaginationDTO;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.CategoryPayload;
 import com.example.myshop.service.CategoryService;
@@ -32,8 +33,13 @@ public class CategoryController implements CategoryResource {
     }
 
     @Override
-    public ResponseEntity<List<CategoryDTO>> getAll() {
-        return ResponseEntity.ok(categoryService.getAll());
+    public ResponseEntity<PaginationDTO<CategoryDTO>> getAll(Integer page, Integer size, String search, List<String> sortColumns) {
+        return ResponseEntity.ok(categoryService.getAll(page, size, search, sortColumns));
+    }
+
+    @Override
+    public ResponseEntity<List<CategoryDTO>> getAll(String search) {
+        return ResponseEntity.ok(categoryService.getAll(search));
     }
 
     @Override

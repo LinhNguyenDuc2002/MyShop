@@ -1,7 +1,6 @@
 package com.example.myshop.config;
 
 import org.modelmapper.ModelMapper;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
