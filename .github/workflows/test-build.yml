@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code # clone source from repository to runner
         uses: actions/checkout@v3

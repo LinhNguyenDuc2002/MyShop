@@ -24,6 +24,11 @@ spring:
       validation-timeout: 5000
       connection-test-query: SELECT 1
 
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
   # A option in springboot framework is used to define Hibernate behavior in creating and updating database
   # Hibernate will create and update tables in database, corresponding to object in your app.
   # if table don't exist, Hibernate will create it. Else, Hibernate will update changes
