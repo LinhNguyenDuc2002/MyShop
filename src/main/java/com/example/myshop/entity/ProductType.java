@@ -10,12 +10,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Collection;
 
 @Entity
 @Table(name = "product_types")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class ProductType {
     @Id
     @UuidGenerator
@@ -28,7 +38,7 @@ public class ProductType {
     private Double price;
 
     @Column(name = "quantity")
-    private Double quantity;
+    private Long quantity;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
@@ -39,5 +49,5 @@ public class ProductType {
     private Product product;
 
     @OneToMany(mappedBy = "productType", fetch = FetchType.EAGER)
-    private Collection<ProductTypeAttribute> productTypeAttributes;
+    private Collection<ProductTypeAttributeValue> productTypeAttributeValues;
 }

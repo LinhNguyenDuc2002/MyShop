@@ -45,7 +45,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     }
 
     @Override
-    public Map<String, Object> upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException {
+    public Map<String, Object> upload(MultipartFile file, Map<String, String> args) throws IOException {
         try {
             return cloudinary.uploader().upload(file.getBytes(), args);
         } catch (Exception e) {

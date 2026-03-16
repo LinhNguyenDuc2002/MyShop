@@ -6,8 +6,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,12 +45,4 @@ public class Image {
 //    @Enumerated(EnumType.STRING)
     @Convert(converter = ImageStatusConverter.class)
     private ImageStatus status;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = true)
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "comment_id", nullable = true)
-    private Comment comment;
 }

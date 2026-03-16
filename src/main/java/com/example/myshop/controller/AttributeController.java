@@ -1,6 +1,7 @@
 package com.example.myshop.controller;
 
 import com.example.myshop.dto.AttributeDTO;
+import com.example.myshop.dto.AttributeValueDTO;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.AttributePayload;
 import com.example.myshop.service.AttributeService;
@@ -48,5 +49,12 @@ public class AttributeController implements AttributeResource {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(attributeService.delete(ids));
+    }
+
+    @Override
+    public ResponseEntity<List<AttributeValueDTO>> searchValues(String id, String key) throws I18nException {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(attributeService.searchValues(id, key));
     }
 }

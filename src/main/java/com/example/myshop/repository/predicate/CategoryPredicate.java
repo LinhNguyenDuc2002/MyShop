@@ -8,7 +8,7 @@ public class CategoryPredicate extends BasePredicate {
 
     public CategoryPredicate search(String key) {
         if (StringUtils.hasText(key)) {
-            criteria.and(qCategory.name.contains(key));
+            criteria.and(qCategory.name.containsIgnoreCase(key));
         }
 
         return this;

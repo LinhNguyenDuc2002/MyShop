@@ -14,7 +14,7 @@ public interface CloudinaryService {
 
     CompletableFuture<Map> uploadAsync(MultipartFile file, Map<String, String> args) throws IOException, I18nException;
 
-    Map<String, Object> upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException;
+    Map<String, Object> upload(MultipartFile file, Map<String, String> args) throws IOException;
 
     void destroy(String id) throws IOException;
 
