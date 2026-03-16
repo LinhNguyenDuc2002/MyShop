@@ -1,6 +1,7 @@
 package com.example.myshop.service;
 
 import com.example.myshop.dto.AttributeDTO;
+import com.example.myshop.dto.AttributeValueDTO;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.AttributePayload;
 
@@ -16,4 +17,6 @@ public interface AttributeService {
     void delete(String id) throws I18nException;
 
     Object delete(List<String> ids);
+
+    List<AttributeValueDTO> searchValues(String id, String key) throws I18nException;
 }

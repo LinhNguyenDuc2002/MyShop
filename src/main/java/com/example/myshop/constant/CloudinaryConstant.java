@@ -15,4 +15,6 @@ public final class CloudinaryConstant {
     public final static String SECURE_URL = "secure_url";
     public final static String FOLDER = "folder";
     public final static String INVALIDATE = "invalidate";
+    public final static String ASYNC = "async";
+    public final static String NOTIFICATION_URL = "notification_url";
 }

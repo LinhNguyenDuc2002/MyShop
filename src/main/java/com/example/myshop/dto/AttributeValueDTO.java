@@ -1,6 +1,5 @@
 package com.example.myshop.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,13 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class CategoryDTO {
-    private String id;
+public class AttributeValueDTO {
+    private Long id;
 
-    private String name;
-
-    private String description;
-
-    @JsonProperty("image_url")
-    private String imageUrl;
+    private String value;
 }

@@ -1,10 +1,11 @@
 package com.example.myshop.entity;
 
+import com.example.myshop.constant.ImageStatus;
+import com.example.myshop.converter.ImageStatusConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,9 @@ public class Image {
     @Column(name = "public_id")
     private String publicId;
 
+    @Column(name = "asset_id")
+    private String assetId;
+
     @Column(name = "format")
     private String format;
 
@@ -38,13 +42,7 @@ public class Image {
     private String resourceType;
 
     @Column(name = "status")
-    private boolean status;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = true)
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "comment_id", nullable = true)
-    private Comment comment;
+//    @Enumerated(EnumType.STRING)
+    @Convert(converter = ImageStatusConverter.class)
+    private ImageStatus status;
 }

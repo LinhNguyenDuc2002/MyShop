@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code # clone source from repository to runner
         uses: actions/checkout@v3
@@ -26,9 +27,20 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
+            
       - name: Build with Maven
         run: mvn clean install -DskipTests
+
+#      - name: Run SonarQube Analysis
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        run: |
+#          mvn sonar:sonar \
+#          -Dsonar.projectKey=LinhNguyenDuc2002_MyShop \
+#          -Dsonar.organization=myshop \
+#          -Dsonar.host.url=https://sonarcloud.io \
+#          -Dsonar.login=$SONAR_TOKEN
+          
 
 #      - name: Run tests
 #        run: mvn test

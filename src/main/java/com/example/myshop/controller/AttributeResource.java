@@ -1,6 +1,7 @@
 package com.example.myshop.controller;
 
 import com.example.myshop.dto.AttributeDTO;
+import com.example.myshop.dto.AttributeValueDTO;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.AttributePayload;
 import jakarta.validation.Valid;
@@ -32,4 +33,10 @@ public interface AttributeResource {
 
     @DeleteMapping
     ResponseEntity<Object> delete(@RequestBody List<String> ids);
+
+//    @PostMapping("/{id}/values")
+//    ResponseEntity<AttributeValueDTO> createValue(@RequestBody String name);
+
+    @GetMapping("/{id}/values")
+    ResponseEntity<List<AttributeValueDTO>> searchValues(@PathVariable String id, @RequestParam(required = true) String key) throws I18nException;
 }

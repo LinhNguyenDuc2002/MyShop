@@ -1,12 +1,17 @@
 package com.example.myshop.service.impl;
 
 import com.example.myshop.dto.AttributeDTO;
+import com.example.myshop.dto.AttributeValueDTO;
 import com.example.myshop.entity.Attribute;
+import com.example.myshop.entity.AttributeValue;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.mapper.AttributeMapper;
+import com.example.myshop.mapper.AttributeValueMapper;
 import com.example.myshop.payload.AttributePayload;
 import com.example.myshop.repository.AttributeRepository;
+import com.example.myshop.repository.AttributeValueRepository;
 import com.example.myshop.repository.predicate.AttributePredicate;
+import com.example.myshop.repository.predicate.AttributeValuePredicate;
 import com.example.myshop.service.AttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +25,13 @@ public class AttributeServiceImpl implements AttributeService {
     private AttributeRepository attributeRepository;
 
     @Autowired
+    private AttributeValueRepository attributeValueRepository;
+
+    @Autowired
     private AttributeMapper attributeMapper;
+
+    @Autowired
+    private AttributeValueMapper attributeValueMapper;
 
     @Override
     public AttributeDTO create(AttributePayload attributePayload) {
@@ -81,5 +92,14 @@ public class AttributeServiceImpl implements AttributeService {
         }
 
         return null;
+    }
+
+    @Override
+    public List<AttributeValueDTO> searchValues(String id, String key) throws I18nException {
+        AttributeValuePredicate attributeValuePredicate = new AttributeValuePredicate()
+                .id(id)
+                .search(key);
+        List<AttributeValue> attributeValues = attributeValueRepository.findAll(attributeValuePredicate.getCriteria());
+        return attributeValueMapper.toDtoList(attributeValues);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.myshop.service;
 
 import com.example.myshop.dto.CategoryDTO;
+import com.example.myshop.dto.PaginationDTO;
 import com.example.myshop.exception.I18nException;
 import com.example.myshop.payload.CategoryPayload;
 
@@ -12,7 +13,9 @@ public interface CategoryService {
 
     CategoryDTO update(String id, CategoryPayload categoryPayload) throws I18nException, IOException;
 
-    List<CategoryDTO> getAll();
+    PaginationDTO<CategoryDTO> getAll(Integer page, Integer size, String search, List<String> sortColumns);
+
+    List<CategoryDTO> getAll(String search);
 
     CategoryDTO delete(String id) throws I18nException;
 }

@@ -7,9 +7,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public interface CloudinaryService {
-    Image upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException;
+//    Image upload(MultipartFile file, Map<String, String> args) throws IOException, I18nException;
+
+    CompletableFuture<Map> uploadAsync(MultipartFile file, Map<String, String> args) throws IOException, I18nException;
+
+    Map<String, Object> upload(MultipartFile file, Map<String, String> args) throws IOException;
 
     void destroy(String id) throws IOException;
 

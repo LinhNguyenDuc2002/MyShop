@@ -120,8 +120,8 @@ public class UserServiceImpl implements UserService {
             Image image = user.getImage();
             args.put(CloudinaryConstant.PUBLIC_ID, image.getPublicId());
         }
-        Image image = cloudinaryService.upload(avatar, args);
-        user.setImage(image);
+//        Image image = cloudinaryService.upload(avatar, args);
+//        user.setImage(image);
         userRepository.save(user);
     }
 
